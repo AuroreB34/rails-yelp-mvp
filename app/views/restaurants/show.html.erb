@@ -1,0 +1,24 @@
+<h1><%= @restaurant.name %></h1>
+
+<p><%= @restaurant.address %></p>
+<p>Catégorie : <%= @restaurant.category %></p>
+
+<h2>Avis</h2>
+
+<% if @restaurant.reviews.any? %>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <li>
+        <p>Contenu de l'avis : <%= review.content %></p>
+        <p>Note : <%= review.rating %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun avis pour ce restaurant.</p>
+<% end %>
+
+<%= link_to 'Nouvel avis', new_restaurant_review_path(@restaurant) %>
+<%= link_to 'Modifier', edit_restaurant_path(@restaurant) %>
+<%= link_to 'Supprimer', @restaurant, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce restaurant et tous ses avis ?' } %>
+<%= link_to 'Retour à la liste des restaurants', restaurants_path %>
